@@ -4,14 +4,10 @@ stages:          # List of stages for jobs, and their order of execution
   - build
   - test
 
-install-gcc:
-  stage: build
-  script:
-    - apk add gcc
-    
 install-poetry:
   stage: build
   script:
+    - apk add gcc
     - pip install poetry
     - poetry install
 
