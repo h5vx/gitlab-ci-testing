@@ -1,0 +1,17 @@
+image: python:3.10.4-alpine
+
+stages:          # List of stages for jobs, and their order of execution
+  - build
+  - test
+
+install-poetry:
+  stage: build
+  script:
+    - pip install poetry
+    - poetry install
+
+unit-test-job: 
+  stage: test
+  script:
+    - poetry run pytest
+    - echo "All tests passed!"
