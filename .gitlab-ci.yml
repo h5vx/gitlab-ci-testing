@@ -1,24 +1,13 @@
 image: python:3.10.4-alpine
 
 stages:          # List of stages for jobs, and their order of execution
-  - build
   - test
 
-install-poetry:
-  stage: build
+run-tests:
+  stage: test
   script:
     - apk add musl-dev libffi-dev gcc  # Poetry dependencies
     - pip install poetry
-
-install-dependencies:
-    stage: build
-    needs: ["install-poetry"]
-    script:
     - poetry install
-
-run-tests: 
-  stage: test
-  needs: ["install-dependencies"]
-  script:
     - poetry run pytest
     - echo "All tests passed!"
