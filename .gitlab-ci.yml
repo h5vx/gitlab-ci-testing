@@ -12,11 +12,13 @@ install-poetry:
 
 install-dependencies:
     stage: build
+    needs: ["install-poetry"]
     script:
     - poetry install
 
 run-tests: 
   stage: test
+  needs: ["install-dependencies"]
   script:
     - poetry run pytest
     - echo "All tests passed!"
