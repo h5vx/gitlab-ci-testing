@@ -7,11 +7,15 @@ stages:          # List of stages for jobs, and their order of execution
 install-poetry:
   stage: build
   script:
-    - apk add gcc
+    - apk add musl-dev libffi-dev gcc  # Poetry dependencies
     - pip install poetry
+
+install-dependencies:
+    stage: build
+    script:
     - poetry install
 
-unit-test-job: 
+run-tests: 
   stage: test
   script:
     - poetry run pytest
